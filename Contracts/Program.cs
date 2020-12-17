@@ -23,15 +23,13 @@ namespace Contracts {
 
             Contract contract = new Contract(number, date, totalValue);
 
-            ContractService contractService = new ContractService();
+            ContractService contractService = new ContractService(new PaypalService());
             contractService.ProcessContract(contract, n);
 
             Console.WriteLine();
             Console.WriteLine("Installments: ");
-            Console.WriteLine(contract.Installments);
-
             foreach (Installment i in contract.Installments) {
-                Console.WriteLine(i.DueDate + " - " + i.Amount.ToString("F2", CultureInfo.InvariantCulture));
+                Console.WriteLine(i.DueDate.ToString("dd/MM/yyy") + " - " + i.Amount.ToString("F2", CultureInfo.InvariantCulture));
             }
         }
     }

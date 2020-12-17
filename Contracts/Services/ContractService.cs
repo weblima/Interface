@@ -4,7 +4,11 @@ using Contracts.Entities;
 namespace Contracts.Services {
     class ContractService {
 
-        private PaypalService _paypalService = new PaypalService();
+        private IOnlinePaymentService _paymentService;
+
+        public ContractService(IOnlinePaymentService paymentService) {
+            _paymentService = paymentService;
+        }
 
         public void ProcessContract(Contract contract, int months) {
 
@@ -14,8 +18,8 @@ namespace Contracts.Services {
 
                 DateTime dueDate = contract.Date.AddMonths(i);
 
-                double amountInterest = _paypalService.Interest(amount, i);
-                double PaymentFee = _paypalService.PaymentFee(amountInterest);
+                double amountInterest = _paymentService.Interest(amount, i);
+                double PaymentFee = _paymentService.PaymentFee(amountInterest);
 
                 Installment installment = new Installment(dueDate, PaymentFee);
                 contract.AddInstallment(installment);

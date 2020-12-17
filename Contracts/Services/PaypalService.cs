@@ -1,6 +1,6 @@
 ﻿
 namespace Contracts.Services {
-    class PaypalService {
+    class PaypalService : IOnlinePaymentService {
 
         public double PaymentFee(double amount) {
 
