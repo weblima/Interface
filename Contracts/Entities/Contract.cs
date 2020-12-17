@@ -16,5 +16,13 @@ namespace Contracts.Entities {
             TotalValue = totalValue;
         }
 
+        public void AddInstallment(Installment installment) {
+            Installments.Add(installment);
+        }
+
+        public void RemoveInstallment(Installment installment) {
+            Installments.Remove(installment);
+        }
+
     }
 }
